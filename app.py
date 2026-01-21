@@ -26,14 +26,14 @@ def pdf_olustur(ogrenci_adi, sinav_adi, dogru, yanlis, bos, net, df_detay):
 
     # Başlık
     pdf.set_font("Arial", 'B', 16)
-    pdf.cell(0, 10, tr_karakter_duzelt("SINAV SONUC BELGESI"), ln=True, align='C')
+    pdf.cell(0, 10, tr_karakter_duzelt("SINAV SONUÇ BELGESİ"), ln=True, align='C')
     pdf.set_font("Arial", size=10)
     pdf.cell(0, 10, tr_karakter_duzelt(f"Sinav: {sinav_adi}"), ln=True, align='C')
     pdf.ln(5)
 
     # Öğrenci Bilgisi
     pdf.set_font("Arial", size=12)
-    pdf.cell(0, 10, tr_karakter_duzelt(f"Ogrenci Adi: {ogrenci_adi}"), ln=True)
+    pdf.cell(0, 10, tr_karakter_duzelt(f"Ögrenci Adı: {ogrenci_adi}"), ln=True)
     pdf.cell(0, 10, f"Tarih: {pd.Timestamp.now().strftime('%d-%m-%Y')}", ln=True)
     pdf.ln(5)
 
@@ -96,16 +96,16 @@ cevap_anahtari_string = ""
 st.sidebar.subheader("Sınav Seviyesi")
 seviye = st.sidebar.radio(
     "Öğrenci Grubu Seçiniz:",
-    ["Lise", "Ortaokul"]
+    ["Ortaokul", "Lise"]
 )
 
 # Seviyeye göre ayarları yap
-if "Lise" in seviye:
-    secenekler = ["-", "A", "B", "C", "D", "E"]
-    yanlis_goturme_orani = 4.0
-else:
+if "Ortaokul" in seviye:
     secenekler = ["-", "A", "B", "C", "D"]
     yanlis_goturme_orani = 3.0
+else:
+    secenekler = ["-", "A", "B", "C", "D", "E"]
+    yanlis_goturme_orani = 4.0
 
 if not dosyalar:
     st.sidebar.error("⚠️ Klasörde sınav dosyası bulunamadı!")
